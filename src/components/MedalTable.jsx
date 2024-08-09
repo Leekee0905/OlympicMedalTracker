@@ -2,7 +2,7 @@ import "../styles/MedalTable.css";
 const MedalTable = ({ data, setPushData }) => {
   const localStorageItem = JSON.parse(localStorage.getItem("nations"));
 
-  const sortedData = localStorageItem.sort((a, b) => {
+  const sortedData = data.sort((a, b) => {
     if (a.gold === b.gold) {
       return b.gold + b.silver + b.cooper - (a.gold + a.silver + a.cooper);
     } else {
