@@ -11,20 +11,30 @@ const InputBox = ({ pushData, setPushData }) => {
     cooper: 0,
   });
 
+  const sortData = (array) => {
+    return array.sort((a, b) => {
+      if (a.gold === b.gold) {
+        return b.gold + b.silver + b.cooper - (a.gold + a.silver + a.cooper);
+      } else {
+        return b.gold - a.gold;
+      }
+    });
+  };
+
   const handleOnSubmit = (event) => {
     event.preventDefault();
     const localStorageItem = JSON.parse(localStorage.getItem("nations")) || [];
     const updateIndex = localStorageItem.findIndex(
       (e) => e.nation === data.nation
     );
-
     if (data.nation === "") {
       alert("국가를 입력해주세요");
     } else if (updateIndex >= 0) {
       alert("이미 등록된 국가입니다.");
     } else {
-      setPushData([...pushData, data]);
-      localStorage.setItem("nations", JSON.stringify([...pushData, data]));
+      const updateData = sortData([...pushData, data]);
+      setPushData(updateData);
+      localStorage.setItem("nations", JSON.stringify(updateData));
       setData({
         nation: "",
         gold: 0,
@@ -40,15 +50,11 @@ const InputBox = ({ pushData, setPushData }) => {
       (e) => e.nation === data.nation
     );
     if (updateIndex >= 0) {
-      setPushData(
+      const updateData = sortData(
         pushData.map((e, index) => (index === updateIndex ? data : e))
       );
-      localStorage.setItem(
-        "nations",
-        JSON.stringify(
-          pushData.map((e, index) => (index === updateIndex ? data : e))
-        )
-      );
+      setPushData(updateData);
+      localStorage.setItem("nations", JSON.stringify(updateData));
       setData({
         nation: "",
         gold: 0,

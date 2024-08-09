@@ -2,14 +2,6 @@ import "../styles/MedalTable.css";
 const MedalTable = ({ data, setPushData }) => {
   const localStorageItem = JSON.parse(localStorage.getItem("nations"));
 
-  const sortedData = data.sort((a, b) => {
-    if (a.gold === b.gold) {
-      return b.gold + b.silver + b.cooper - (a.gold + a.silver + a.cooper);
-    } else {
-      return b.gold - a.gold;
-    }
-  });
-
   const handleDeleteButton = (idx) => {
     setPushData(data.filter((e, index) => index !== idx));
     localStorage.setItem(
@@ -32,7 +24,7 @@ const MedalTable = ({ data, setPushData }) => {
         </thead>
 
         <tbody>
-          {sortedData.map((element, idx) => {
+          {data.map((element, idx) => {
             return (
               <tr
                 key={idx}
