@@ -1,0 +1,10 @@
+header {
+  text-align: center;
+}
+
+header > h1 {
+  color: rgb(16, 16, 121);
+  font-size: 64px;
+  font-weight: bold;
+  margin-top: 24px;
+}
