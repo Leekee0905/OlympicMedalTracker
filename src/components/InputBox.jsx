@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/InputBox.css";
 import Medal from "./Medal";
 
-const InputBox = ({ pushData, setPushData }) => {
+const InputBox = ({ localData, setLocalData }) => {
   const medalType = ["금메달", "은메달", "동메달"];
   const [data, setData] = useState({
     nation: "",
@@ -25,15 +25,15 @@ const InputBox = ({ pushData, setPushData }) => {
     event.preventDefault();
     const localStorageItem = JSON.parse(localStorage.getItem("nations")) || [];
     const updateIndex = localStorageItem.findIndex(
-      (e) => e.nation === data.nation
+      (element) => element.nation === data.nation
     );
     if (data.nation === "") {
       alert("국가를 입력해주세요");
     } else if (updateIndex >= 0) {
       alert("이미 등록된 국가입니다.");
     } else {
-      const updateData = sortData([...pushData, data]);
-      setPushData(updateData);
+      const updateData = sortData([...localData, data]);
+      setLocalData(updateData);
       localStorage.setItem("nations", JSON.stringify(updateData));
       setData({
         nation: "",
@@ -47,13 +47,15 @@ const InputBox = ({ pushData, setPushData }) => {
   const handleUpdateButton = () => {
     const localStorageItem = JSON.parse(localStorage.getItem("nations")) || [];
     const updateIndex = localStorageItem.findIndex(
-      (e) => e.nation === data.nation
+      (element) => element.nation === data.nation
     );
     if (updateIndex >= 0) {
       const updateData = sortData(
-        pushData.map((e, index) => (index === updateIndex ? data : e))
+        localData.map((element, index) =>
+          index === updateIndex ? data : element
+        )
       );
-      setPushData(updateData);
+      setLocalData(updateData);
       localStorage.setItem("nations", JSON.stringify(updateData));
       setData({
         nation: "",

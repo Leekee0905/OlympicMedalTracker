@@ -1,9 +1,9 @@
 import "../styles/MedalTable.css";
-const MedalTable = ({ data, setPushData }) => {
+const MedalTable = ({ localData, setLocalData }) => {
   const localStorageItem = JSON.parse(localStorage.getItem("nations"));
 
   const handleDeleteButton = (idx) => {
-    setPushData(data.filter((e, index) => index !== idx));
+    setLocalData(localData.filter((e, index) => index !== idx));
     localStorage.setItem(
       "nations",
       JSON.stringify(localStorageItem.filter((e, index) => index !== idx))
@@ -24,7 +24,7 @@ const MedalTable = ({ data, setPushData }) => {
         </thead>
 
         <tbody>
-          {data.map((element, idx) => {
+          {localData.map((element, idx) => {
             return (
               <tr
                 key={idx}

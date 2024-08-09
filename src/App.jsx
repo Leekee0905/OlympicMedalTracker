@@ -6,15 +6,15 @@ import MedalTable from "./components/MedalTable";
 import NoData from "./components/NoData";
 
 function App() {
-  const [pushData, setPushData] = useState(
+  const [localData, setLocalData] = useState(
     JSON.parse(localStorage.getItem("nations")) || []
   );
   return (
     <div id="medal-box">
       <Header />
-      <InputBox setPushData={setPushData} pushData={pushData} />
-      {pushData.length > 0 ? (
-        <MedalTable data={pushData} setPushData={setPushData} />
+      <InputBox localData={localData} setLocalData={setLocalData} />
+      {localData.length > 0 ? (
+        <MedalTable localData={localData} setLocalData={setLocalData} />
       ) : (
         <NoData />
       )}
