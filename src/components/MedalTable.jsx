@@ -1,14 +1,5 @@
 import "../styles/MedalTable.css";
-const MedalTable = ({ localData, setLocalData }) => {
-  const localStorageItem = JSON.parse(localStorage.getItem("nations"));
-
-  const handleDeleteButton = (idx) => {
-    setLocalData(localData.filter((e, index) => index !== idx));
-    localStorage.setItem(
-      "nations",
-      JSON.stringify(localStorageItem.filter((e, index) => index !== idx))
-    );
-  };
+const MedalTable = ({ data, handleDelete }) => {
   return (
     <div id="table-box">
       <table id="medal-table">
@@ -24,7 +15,7 @@ const MedalTable = ({ localData, setLocalData }) => {
         </thead>
 
         <tbody>
-          {localData.map((element, idx) => {
+          {data.map((element, idx) => {
             return (
               <tr
                 key={idx}
@@ -40,11 +31,7 @@ const MedalTable = ({ localData, setLocalData }) => {
                 <th>{element.cooper}</th>
                 <th>{element.gold + element.silver + element.cooper}</th>
                 <th>
-                  <button
-                    className="delete-btn"
-                    type="button"
-                    onClick={() => handleDeleteButton(idx)}
-                  >
+                  <button className="delete-btn" type="button" onClick={() => handleDelete(idx)}>
                     삭제
                   </button>
                 </th>
