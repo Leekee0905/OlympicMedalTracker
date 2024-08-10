@@ -2,8 +2,9 @@ import { useState } from "react";
 import "../styles/InputBox.css";
 import Medal from "./Medal";
 
-const InputBox = ({ handleOnSubmit, handleUpdateButton }) => {
+const InputBox = ({ handleSubmit, handleUpdate }) => {
   const medalType = ["금메달", "은메달", "동메달"];
+
   const [data, setData] = useState({
     nation: "",
     gold: 0,
@@ -13,10 +14,7 @@ const InputBox = ({ handleOnSubmit, handleUpdateButton }) => {
 
   return (
     <div className="input-box">
-      <form
-        className="input-form"
-        onSubmit={(e) => handleOnSubmit(e, data, setData)}
-      >
+      <form className="input-form" onSubmit={(e) => handleSubmit(e, data, setData)}>
         <div className="medal-input">
           <label>
             <span className="medal-title">국가명</span>
@@ -38,11 +36,7 @@ const InputBox = ({ handleOnSubmit, handleUpdateButton }) => {
           <button className="update-button" type="submit">
             국가추가
           </button>
-          <button
-            className="update-button"
-            type="button"
-            onClick={() => handleUpdateButton(data, setData)}
-          >
+          <button className="update-button" type="button" onClick={() => handleUpdate(data, setData)}>
             업데이트
           </button>
         </div>
