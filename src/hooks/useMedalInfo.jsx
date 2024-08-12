@@ -3,9 +3,8 @@ const useMedalInfo = (localData, setLocalData) => {
     return array.sort((a, b) => {
       if (a.gold === b.gold) {
         return b.gold + b.silver + b.cooper - (a.gold + a.silver + a.cooper);
-      } else {
-        return b.gold - a.gold;
       }
+      return b.gold - a.gold;
     });
   };
 
@@ -14,9 +13,12 @@ const useMedalInfo = (localData, setLocalData) => {
     localStorage.setItem("nations", JSON.stringify(data));
   };
 
+  // 이벤트 폼태그에서
   const handleOnSubmit = (event, data, setData) => {
     event.preventDefault();
-    const updateIndex = localData.findIndex((element) => element.nation === data.nation);
+    const updateIndex = localData.findIndex(
+      (element) => element.nation === data.nation
+    );
     if (data.nation === "") {
       alert("국가를 입력해주세요");
     } else if (updateIndex >= 0) {
@@ -35,9 +37,15 @@ const useMedalInfo = (localData, setLocalData) => {
 
   const handleUpdateButton = (data, setData) => {
     const localStorageItem = JSON.parse(localStorage.getItem("nations")) || [];
-    const updateIndex = localStorageItem.findIndex((element) => element.nation === data.nation);
+    const updateIndex = localStorageItem.findIndex(
+      (element) => element.nation === data.nation
+    );
     if (updateIndex >= 0) {
-      const updateData = sortData(localData.map((element, index) => (index === updateIndex ? data : element)));
+      const updateData = sortData(
+        localData.map((element, index) =>
+          index === updateIndex ? data : element
+        )
+      );
       syncStateLocalData(updateData);
       setData({
         nation: "",
@@ -50,6 +58,7 @@ const useMedalInfo = (localData, setLocalData) => {
     }
   };
 
+  // 필터는 인덱스 말고 다른 값으로
   const handleDeleteButton = (idx) => {
     const filteredData = localData.filter((e, index) => index !== idx);
     syncStateLocalData(filteredData);
