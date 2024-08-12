@@ -4,7 +4,7 @@ import Button from "./Button";
 import Input from "./Input";
 
 const InputBox = ({ handleOnSubmit, handleUpdateButton }) => {
-  const medalType = {
+  const inputType = {
     nation: "국가명",
     gold: "금메달",
     silver: "은메달",
@@ -25,7 +25,7 @@ const InputBox = ({ handleOnSubmit, handleUpdateButton }) => {
           handleOnSubmit(data, setData);
         }}
       >
-        {Object.entries(medalType).map(([key, value]) =>
+        {Object.entries(inputType).map(([key, value]) =>
           key === "nation" ? (
             <Input
               key={key}
