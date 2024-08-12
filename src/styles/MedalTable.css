@@ -1,4 +1,4 @@
-#medal-table {
+.medal-table {
   width: 90%;
   color: white;
   border-collapse: collapse;
@@ -7,21 +7,8 @@
   border-radius: 10px;
 }
 
-#table-box {
+.table-box {
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.delete-btn {
-  width: 50px;
-  height: 30px;
-  margin: 0 10px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: bold;
-  background-color: #ff0000;
-  color: white;
-  border: 0;
-  cursor: pointer;
 }
