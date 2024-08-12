@@ -1,8 +1,9 @@
 import "../styles/MedalTable.css";
-const MedalTable = ({ data, handleDelete }) => {
+import Button from "./Button";
+const MedalTable = ({ data, handleDeleteButton }) => {
   return (
-    <div id="table-box">
-      <table id="medal-table">
+    <div className="table-box">
+      <table className="medal-table">
         <thead>
           <tr style={{ backgroundColor: "#2f4858", height: "50px" }}>
             <th>국가명</th>
@@ -19,6 +20,7 @@ const MedalTable = ({ data, handleDelete }) => {
             return (
               <tr
                 key={idx}
+                className={element.nation}
                 style={{
                   backgroundColor: idx % 2 === 0 ? "#dfe0df" : "#9baebc",
                   color: "black",
@@ -28,12 +30,15 @@ const MedalTable = ({ data, handleDelete }) => {
                 <th>{element.nation}</th>
                 <th>{element.gold}</th>
                 <th>{element.silver}</th>
-                <th>{element.cooper}</th>
-                <th>{element.gold + element.silver + element.cooper}</th>
+                <th>{element.bronze}</th>
+                <th>{element.gold + element.silver + element.bronze}</th>
                 <th>
-                  <button className="delete-btn" type="button" onClick={() => handleDelete(idx)}>
-                    삭제
-                  </button>
+                  <Button
+                    type="button"
+                    classKeyword="delete-btn"
+                    text="삭제"
+                    func={() => handleDeleteButton(element.nation)}
+                  />
                 </th>
               </tr>
             );

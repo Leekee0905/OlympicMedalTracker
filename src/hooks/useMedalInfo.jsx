@@ -1,21 +1,25 @@
-const useMedalInfo = (localData, setLocalData) => {
+import { useState } from "react";
+
+const useMedalInfo = (key) => {
+  const [localData, setLocalData] = useState(
+    JSON.parse(localStorage.getItem(key)) || []
+  );
+
   const sortData = (array) => {
     return array.sort((a, b) => {
       if (a.gold === b.gold) {
-        return b.gold + b.silver + b.cooper - (a.gold + a.silver + a.cooper);
+        return b.gold + b.silver + b.bronze - (a.gold + a.silver + a.bronze);
       }
       return b.gold - a.gold;
     });
   };
 
   const syncStateLocalData = (data) => {
+    localStorage.setItem(key, JSON.stringify(data));
     setLocalData(data);
-    localStorage.setItem("nations", JSON.stringify(data));
   };
 
-  // 이벤트 폼태그에서
-  const handleOnSubmit = (event, data, setData) => {
-    event.preventDefault();
+  const handleOnSubmit = (data, setData) => {
     const updateIndex = localData.findIndex(
       (element) => element.nation === data.nation
     );
@@ -30,7 +34,7 @@ const useMedalInfo = (localData, setLocalData) => {
         nation: "",
         gold: 0,
         silver: 0,
-        cooper: 0,
+        bronze: 0,
       });
     }
   };
@@ -51,20 +55,20 @@ const useMedalInfo = (localData, setLocalData) => {
         nation: "",
         gold: 0,
         silver: 0,
-        cooper: 0,
+        bronze: 0,
       });
     } else {
       alert("등록되지 않은 국가입니다.");
     }
   };
 
-  // 필터는 인덱스 말고 다른 값으로
-  const handleDeleteButton = (idx) => {
-    const filteredData = localData.filter((e, index) => index !== idx);
+  const handleDeleteButton = (nation) => {
+    const filteredData = localData.filter((e) => e.nation !== nation);
     syncStateLocalData(filteredData);
   };
 
   return {
+    localData,
     handleOnSubmit,
     handleUpdateButton,
     handleDeleteButton,
