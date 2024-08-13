@@ -53,7 +53,7 @@ const InputBox = ({ handleOnSubmit, handleUpdateButton }) => {
             type="button"
             classKeyword="update-button"
             text="업데이트"
-            func={() => handleUpdateButton(data, setData)}
+            onClick={() => handleUpdateButton(data, setData)}
           />
         </div>
       </form>

@@ -37,7 +37,7 @@ const MedalTable = ({ data, handleDeleteButton }) => {
                     type="button"
                     classKeyword="delete-btn"
                     text="삭제"
-                    func={() => handleDeleteButton(element.nation)}
+                    onClick={() => handleDeleteButton(element.nation)}
                   />
                 </th>
               </tr>

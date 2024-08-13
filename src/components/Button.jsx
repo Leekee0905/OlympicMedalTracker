@@ -1,4 +1,4 @@
-const Button = ({ func, type, classKeyword, text }) => {
+const Button = ({ onClick, type, classKeyword, text }) => {
   const deleteStyle = {
     width: "50px",
     height: "30px",
@@ -28,7 +28,7 @@ const Button = ({ func, type, classKeyword, text }) => {
     <button
       className={classKeyword}
       type={type}
-      onClick={func}
+      onClick={onClick}
       style={text === "삭제" ? deleteStyle : defaultStyle}
     >
       {text}
